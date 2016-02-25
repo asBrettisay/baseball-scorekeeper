@@ -95,15 +95,51 @@ a {
 }
 
 .player {
-  height: 100px;
-  width: 100px;
+  height: 150px;
+  width: 200px;
   background-color: blue;
+  color: white;
+  border-radius: 20px;
   position: absolute;
-  transform: rotate(45deg);
   /*bottom: 0;
   right: 0;*/
   z-index: 1;
   bottom: 0;
-  left: 50%;
-  transform: translate(-45%, -10%);
+  left: 41%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5em
+}
+
+.single {
+  border: 5px solid black;
+  height: 400px;
+  width: 300px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
+.double {
+  border: 5px solid black;
+  height: 300px;
+  width: 400px;
+  position: absolute;
+  right: 30%;
+  top: 25%;
+}
+
+.triple {
+  border: 5px solid black;
+  height: 400px;
+  width: 300px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+}
+
+#player2 {
+  left: 75%;
+  top: 59%;
 }

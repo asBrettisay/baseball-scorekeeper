@@ -1,5 +1,9 @@
 <section class="baseball-diamond">
-  <baseball-player></baseball-player>
+  <div baseball-player player-object="atBat.player" ng-model="player1" class="player" data-drag="true" jqyoui-draggable jqyoui-options="{revert: 'true'}"></div>
+  <div baseball-player ng-if="bases.first.player" id="player2" player-object="bases.first.player" ng-model="player2" class="player" data-drag="true" jqyoui-draggable jqyoui-options="{revert: 'true'}"></div>
+  <div class="single" ng-model="base1" data-drop="true" jqyoui-droppable="{onDrop: 'single()', multiple: true}"></div>
+  <div class="double" ng-model="base2" data-drop="true" jqyoui-droppable="{onDrop: 'double()'}"></div>
+  <div class="triple" ng-model="base3" data-drop="true" jqyoui-droppable="{onDrop: 'triple()'}"></div>
   <div class="base-paths">
     <div class="base" id="base-1"></div>
     <div class="base" id="base-2"></div>

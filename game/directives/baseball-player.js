@@ -1,12 +1,17 @@
 angular.module('baseballScorekeeper')
 .directive('baseballPlayer', function($rootScope, idGen) {
   return {
-    restrict: 'E',
-    template: '<div ng-drag="true" class="player"></div>',
+    restrict: 'A',
+    scope: {
+      player: '=playerObject'
+    },
     link: function(scope, element, attrs) {
-      element.attr('ng-drag', 'true');
-      element.css('height', '100px');
-      element.css('width', '100px');
+      scope.$watch('player', function(nv, ov) {
+        scope.player = nv;
+        element.text("#" + scope.player.number)
+        console.log(scope.player)
+      })
+
     }
-  }
-});
+    }
+  });

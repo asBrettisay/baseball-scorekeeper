@@ -1,4 +1,4 @@
-angular.module('baseballScorekeeper', ['ui.router', 'ngDraggable'])
+angular.module('baseballScorekeeper', ['ui.router', 'ngDragDrop'])
 .config(function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/');
@@ -11,6 +11,11 @@ angular.module('baseballScorekeeper', ['ui.router', 'ngDraggable'])
     .state('game', {
       url: '/game',
       templateUrl: '/game/game.html',
-      controller: 'gameCtrl'
+      controller: 'gameCtrl',
+      resolve: {
+        teams: function(teamService) {
+          return teamService.getTeams();
+        }
+      }
     })
 })
