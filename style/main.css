@@ -12,7 +12,7 @@ a {
   position: relative;
 }
 
-.menu {
+.home-menu {
   height: 50vh;
   width: 100vw;
   display: flex;
@@ -44,10 +44,66 @@ a {
 }
 
 .baseball-diamond {
-  background-image: url('../images/baseball-diamond.jpg');
+  /*background-image: url('../images/diamond-2.jpg');*/
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  height: 100vh;
+  height: 75vh;
   width: 100vw;
+  position: absolute;
+  /* top: 25%; */
+}
+
+.base-paths {
+  height: 600px;
+  width: 600px;
+  transform: rotate(45deg) translate(-50%, -50%);
+  border: 10px solid black;
+  position: absolute;
+  bottom: -25%;
+  left: 19%;
+}
+
+.base {
+  height: 80px;
+  width: 80px;
+  background-color: black;
+}
+
+#base-1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#base-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#base-3 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#base-4 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.player {
+  height: 100px;
+  width: 100px;
+  background-color: blue;
+  position: absolute;
+  transform: rotate(45deg);
+  /*bottom: 0;
+  right: 0;*/
+  z-index: 1;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-45%, -10%);
 }

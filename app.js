@@ -1,4 +1,4 @@
-angular.module('baseballScorekeeper', ['ui.router'])
+angular.module('baseballScorekeeper', ['ui.router', 'ngDraggable'])
 .config(function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/');
