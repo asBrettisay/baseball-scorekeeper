@@ -1,0 +1,59 @@
+<div class="curtain">
+</div>
+<ui-view></ui-view>
+
+<div class="roster">
+  <h1>Home Team: {{teams.home.name}}</h1>
+
+  <div class="list-roster">
+    <ul ui-sortable ng-model="teams.home.players">
+      <li ng-repeat="player in teams.home.players">
+        {{$index + 1}}: #{{player.number}} {{player.name}}
+      </li>
+    </ul>
+
+      <h4>Active Pitcher</h4>
+      <li>{{teams.home.activePitcher.name}}</li>
+      <div class="btn-short" >Change Pitcher</div>
+      <div>
+        <h4>Choose a new pitcher</h4>
+        <ul>
+          <li
+          ng-click="changePitcherHome(pitcher)"
+          ng-repeat="pitcher in teams.home.pitchers"
+          >
+            #{{pitcher.number}} {{pitcher.name}}</li>
+        </ul>
+      </div>
+    </ul>
+  </div>
+
+
+  <h1>Away Team: {{teams.away.name}}</h1>
+
+  <div class="list-roster">
+    <ul ui-sortable ng-model="teams.away.players">
+      <li ng-repeat="player in teams.away.players">
+        {{$index + 1}}: #{{player.number}} {{player.name}}
+      </li>
+    </ul>
+
+      <h4>Active Pitcher</h4>
+      <li>{{GameState.away.activePitcher.name}}</li>
+      <div class="btn-short">Change Pitcher</div>
+      <div>
+        <h4>Choose a new pitcher</h4>
+        <ul>
+          <li
+          ng-click="changePitcherAway(pitcher)"
+          ng-repeat="pitcher in teams.away.pitchers"
+          >
+            #{{pitcher.number}} {{pitcher.name}}
+          </li>
+        </ul>
+      </div>
+    </ul>
+  </div>
+
+  <div class="btn" ui-sref="game">Close</div>
+</div>

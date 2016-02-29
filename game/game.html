@@ -1,13 +1,125 @@
-<section class="baseball-diamond">
-  <div baseball-player player-object="atBat.player" ng-model="player1" class="player" data-drag="true" jqyoui-draggable jqyoui-options="{revert: 'true'}"></div>
-  <div baseball-player ng-if="bases.first.player" id="player2" player-object="bases.first.player" ng-model="player2" class="player" data-drag="true" jqyoui-draggable jqyoui-options="{revert: 'true'}"></div>
-  <div class="single" ng-model="base1" data-drop="true" jqyoui-droppable="{onDrop: 'single()', multiple: true}"></div>
-  <div class="double" ng-model="base2" data-drop="true" jqyoui-droppable="{onDrop: 'double()'}"></div>
-  <div class="triple" ng-model="base3" data-drop="true" jqyoui-droppable="{onDrop: 'triple()'}"></div>
-  <div class="base-paths">
-    <div class="base" id="base-1"></div>
-    <div class="base" id="base-2"></div>
-    <div class="base" id="base-3"></div>
-    <div class="base" id="base-4"></div>
-  </div>
+<div class="curtain" ng-if="menuActive" ng-click="$parent.menuActive = !$parent.menuActive"></div>
+
+<div ng-show="$state.includes('game.rosters')" ui-view></div>
+<div class="roster-btn" ui-sref="game.rosters" ng-click="rostersActive = !rostersActive">Roster</div>
+
+
+
+<!-- Pitching Menu -->
+<!-- <div class="game-menu" ng-if="menuActive" >
+  <div pitching-option action="strike" class="btn">Strike</div>
+  <div pitching-option action="ball" class="btn">Ball</div>
+  <div pitching-option action="wildPitch" class="btn">Wild Pitch</div>
+  <div pitching-option action="passedBall" class="btn">Passed Ball</div>
+</div> -->
+
+<!-- Game Menu -->
+<!-- <div class="game-menu" ng-if="menuActive" ng-repeat="option in menuOptions"> -->
+<div class="game-menu" ng-if="menuActive">
+  <div class="btn" scope="option" ng-repeat="option in menuOptions"  menu-option></div>
+</div>
+
+<!-- Baseball Diamond -->
+<section class="game-area" ng-class="{blur: menuActive}">
+  <section class="baseball-diamond">
+
+    <div
+    class="btn"
+    id="nextPlayerBtn"
+    ng-if="!batterActive"
+    ng-click="newBatter()"
+    >Next Batter</div>
+
+    <div player-batter
+      ng-if="batterActive"
+      player-object="gameState.bases.atBat"
+      ng-click="activateBatter()"
+      ng-model="player1"
+      class="player"
+      data-drag="true"
+      jqyoui-draggable
+      jqyoui-options="{revert: invalid}"
+    ></div>
+
+    <div base-runner
+      ng-if="gameState.bases.first"
+      id="player2"
+      player-object="gameState.bases.first"
+      ng-model="player2"
+      class="player"
+      data-drag="true"
+      jqyoui-draggable
+      jqyoui-options="{revert: true}"
+      ng-click="activateRunner()"
+    ></div>
+
+    <div base-runner
+      ng-if="gameState.bases.second"
+      id="player3"
+      player-object="gameState.bases.second"
+      ng-model="player3"
+      class="player"
+      data-drag="true"
+      jqyoui-draggable
+      jqyoui-options="{revert: true}"
+      ng-click="activateRunner()"
+    ></div>
+
+    <div base-runner
+      ng-if="gameState.bases.third"
+      id="player4"
+      player-object="gameState.bases.third"
+      ng-model="player4"
+      class="player"
+      data-drag="true"
+      jqyoui-draggable
+      jqyoui-options="{revert: true}"
+      ng-click="activateRunner()"
+    ></div>
+
+    <div class=pitcher ng-click="activatePitcher()"><span>Pitch</span><img src="images/baseball-pitch.png" /></div>
+
+    <div class="home"
+    data-drop="true"
+    jqyoui-droppable="{onDrop: 'home()'}"
+    ></div>
+
+
+    <div class="single"
+      ng-model="base1"
+      data-drop="true"
+      jqyoui-droppable="{onDrop: 'single()'}"
+    ></div>
+
+    <div class="double"
+      ng-model="base2"
+      data-drop="true"
+      jqyoui-droppable="{onDrop: 'double()'}"
+    ></div>
+
+    <div class="triple"
+      ng-model="base3"
+      data-drop="true"
+      jqyoui-droppable="{onDrop: 'triple()'}"
+    ></div>
+
+    <div class="stats">
+      <h1>Runs: {{gameState.runs}}</h1>
+      <h1>Outs: {{gameState.outs}}</h1>
+      <h1>Strikes: {{gameState.strikes}}</h1>
+      <h1>Balls: {{gameState.balls}}</h1>
+      <h1>Pitch Count: {{gameState.pitchCount}}</h1>
+      <h1>Pitcher: {{GameState.away.activePitcher}}</h1>
+    </div>
+
+    <!-- Base Paths -->
+    <div class="base-paths">
+      <div class="base" id="base-1"></div>
+      <div class="base" id="base-2"></div>
+      <div class="base" id="base-3"></div>
+      <div class="base" id="base-4"></div>
+    </div>
+
+  </section>
+
 </section>

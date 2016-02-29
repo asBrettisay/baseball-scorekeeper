@@ -1,5 +1,5 @@
 angular.module('baseballScorekeeper')
-.directive('baseballPlayer', function($rootScope, idGen) {
+.directive('playerBatter', function($rootScope, idGen) {
   return {
     restrict: 'A',
     scope: {
@@ -8,10 +8,13 @@ angular.module('baseballScorekeeper')
     link: function(scope, element, attrs) {
       scope.$watch('player', function(nv, ov) {
         scope.player = nv;
-        element.text("#" + scope.player.number)
-        console.log(scope.player)
+        if (scope.player)
+          element.text("#" + scope.player.number);
       })
 
+      element.on('mousedown', function() {
+        scope.$emit('playerActive', scope.player);
+      })
     }
-    }
-  });
+  }
+});

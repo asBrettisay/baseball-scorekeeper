@@ -1,0 +1,27 @@
+{
+  "name": "Baseball Scorekeeper",
+  "homepage": "https://github.com/asBrettisay/baseball-scorekeeper",
+  "authors": [
+    "asBrettisay <brett.caudill.is@gmail.com>"
+  ],
+  "description": "A scorekeeping app for the great game of Baseball",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-mocks": "^1.5.0",
+    "angular-ui-router": "ui-router#^0.2.18",
+    "angular-dragdrop": "^1.0.13",
+    "jquery": "^2.2.1",
+    "jquery-ui": "^1.11.4",
+    "angular-ui-sortable": "^0.13.4"
+  }
+}

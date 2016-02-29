@@ -13,23 +13,35 @@
 <!-- Components -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.js"></script>
-<script src="bower_components/touchpunch/touchpunch.min.js"></script>
-<script src="//code.angularjs.org/snapshot/angular.js"></script>
+
+<script src="bower_components/angular/angular.js" charset="utf-8"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-mocks/angular-mocks.js" charset="utf-8"></script>
 
 <script src="bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
+
+<script src="bower_components/angular-ui-sortable/sortable.js" charset="utf-8"></script>
+<script src="bower_components/touchpunch/touchpunch.min.js"></script>
 
 <!-- Apps -->
 <script src="app.js"></script>
 
 <!-- Controllers -->
 <script src="game/gameCtrl.js"></script>
+<script src="game/rosterCtrl.js" charset="utf-8"></script>
 
 <!-- Directives -->
-<script src="game/directives/baseball-player.js"></script>
+<script src="game/directives/playerBatter.js"></script>
+<script src="game/directives/pitchingOption.js"></script>
+<script src="game/directives/menuOption.js" charset="utf-8"></script>
+<script src="game/directives/base-runner.js"></script>
 
 <!-- Services -->
 <script src="game/services/teamService.js"></script>
+<script src="game/services/gameService.js"></script>
+<script src="game/services/menuService.js"></script>
+<script src="game/services/rosterService.js" charset="utf-8"></script>
+<script src="game/services/gameState.js" charset="utf-8"></script>
 
 <!-- Factories -->
 <script src="game/idGen.js" charset="utf-8"></script>

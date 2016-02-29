@@ -2,6 +2,17 @@ a {
   text-decoration: none;
 }
 
+.curtain {
+  z-index: 2;
+  background-color: #000000;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
 .jumbotron {
   background-image: url('../images/jumbotron.jpeg');
   background-size: cover;
@@ -10,6 +21,8 @@ a {
   width: 100vw;
   margin: auto;
   position: relative;
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
 }
 
 .home-menu {
@@ -33,13 +46,40 @@ a {
   justify-content: center;
   align-items: center;
   margin: auto;
-}
+  border-radius: 10px;
+  -webkit-box-shadow: 10px 10px 25px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 25px -1px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 25px -1px rgba(0,0,0,0.75);
+  }
 
 .btn:hover {
   background-color: #214382;
 }
 
 .btn:active {
+  background-color: #1c386b;
+}
+
+.btn-short {
+  width: 500px;
+  height: 150px;
+  background-color: #2953A0;
+  color: white;
+  font-size: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  -webkit-box-shadow: 10px 10px 25px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 25px -1px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 25px -1px rgba(0,0,0,0.75);
+  }
+
+.btn-short:hover {
+  background-color: #214382;
+}
+
+.btn-short:active {
   background-color: #1c386b;
 }
 
@@ -109,7 +149,8 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 5em
+  font-size: 5em;
+  cursor: pointer;
 }
 
 .single {
@@ -139,7 +180,155 @@ a {
   top: 50%;
 }
 
+.home {
+  border: 5px solid black;
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  bottom: -88px;
+  left: 35%;
+}
+
 #player2 {
   left: 75%;
   top: 59%;
+}
+
+#player3 {
+  top: 27%;
+  left: 41%;
+}
+
+#player4 {
+  top: 57%;
+  left: 2%;
+}
+
+.pitcher {
+  position: absolute;
+  top: 64%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.pitcher img {
+  height: 300px;
+  width: 300px;
+}
+
+.pitcher span {
+  position: absolute;
+  font-size: 5em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pitcher:active {
+  top: 66%;
+}
+
+#nextPlayerBtn {
+  position: absolute;
+  bottom: -15%;
+  left: 4%;
+  z-index: 1;
+}
+
+.pregameMenu {
+  border-radius: 10px;
+  background-color: #FFF;
+}
+
+
+
+.game-menu {
+  background-color: #FFF;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85vw;
+  /*height: 49vh;*/
+  z-index: 3;
+  border-radius: 10px;
+  opacity: 1;
+}
+
+.game-menu .btn {
+  width: 730px;
+  margin: 40px auto;
+}
+
+.game-area {
+  height: 100vh;
+  width: 100vw;
+}
+
+.blur {
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.roster {
+  border-radius: 10px;
+  height: 80vh;
+  width: 90vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 2;
+  padding: 50px;
+  box-sizing: border-box;
+  overflow: scroll;
+}
+
+.roster-btn {
+  border-radius: 10px;
+  background-color: #2953A0;
+  color: white;
+  height: 10vh;
+  width: 30vw;
+  position: absolute;
+  top: 2%;
+  right: 5%;
+  font-size: 4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1
+}
+
+.roster-btn:active {
+  background-color: #1c386b;
+}
+
+.stats {
+  float: left;
+  width: 50vw;
+}
+
+.teamSelect {
+  height: 400px;
+  width: 400px;
+}
+
+.roster h1 {
+  font-size: 5em;
+}
+
+.list-roster {
+  font-size: 4em;
+}
+
+.list-roster ul {
+  list-style-type: none;
+}
+
+.roster .btn {
+  width: 90%;
+  margin-bottom: 50px
 }
