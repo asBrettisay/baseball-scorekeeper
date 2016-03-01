@@ -83,6 +83,47 @@ a {
   background-color: #1c386b;
 }
 
+.scoreboard {
+  width: 80vw;
+  height: 12.5vh;
+  margin: auto;
+  position: relative;
+  box-sizing: border-box;
+  font-size: 3em;
+  margin-top: 30px;
+}
+
+.scoreboard .row {
+  height: 5vh;
+  width: 100%;
+  border: 5px solid #000000;
+}
+
+.scoreboard .small-row {
+  height: 2.5vh;
+  width: 100%;
+  border: 5px solid #000000;
+  font-size: 35px;
+}
+
+.scoreboard .team-col {
+  height: 100%;
+  width: 175px;
+  display: inline-block;
+}
+
+.scoreboard .inning-col {
+  height: 100%;
+  display: inline-block;
+  float: left;
+  position: absolute;
+}
+
+#teams-smaller-font {
+  font-size: 25px;
+  position: relative;
+}
+
 .baseball-diamond {
   /*background-image: url('../images/diamond-2.jpg');*/
   background-position: center;
@@ -293,7 +334,7 @@ a {
   height: 10vh;
   width: 30vw;
   position: absolute;
-  top: 2%;
+  top: 20%;
   right: 5%;
   font-size: 4em;
   display: flex;

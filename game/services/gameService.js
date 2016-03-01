@@ -11,7 +11,7 @@ angular.module('baseballScorekeeper')
 
     if (action === 'run') {
       bases.third = null;
-      runs++;
+      runs++
     }
 
     if (action === 'single') {
@@ -61,7 +61,7 @@ angular.module('baseballScorekeeper')
       })
       state.play = 'homerun';
     }
-    return {runs: runs, bases: bases}
+    return runs
   }
 
   this.pitch = function(action, bases, state) {
@@ -160,6 +160,31 @@ angular.module('baseballScorekeeper')
         state.bases[target] = player;
       }
     }
+    return state;
+  }
+
+  this.initializeGameState = function(teams) {
+    teams.home.battingIndex = 0;
+    teams.home.runs = 0;
+    teams.away.battingIndex = 0;
+    teams.away.runs = 0;
+
+    return {
+      pitchCount: 0,
+      strikes: 0,
+      balls: 0,
+      outs: 0,
+      bases: {},
+      home: teams.home,
+      away: teams.away
+    }
+  }
+
+  this.retireSide = function(state) {
+    state.bases = {};
+    state.balls = 0;
+    state.strikes = 0;
+    state.outs = 0;
     return state;
   }
 

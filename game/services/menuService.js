@@ -1,6 +1,16 @@
 angular.module('baseballScorekeeper')
 .service('menuService', function() {
 
+  this.getMenu = function(menu) {
+    if (menu === 'pitcher') {
+      return this.getPitcherMenu();
+    } else if (menu === 'batter') {
+      return this.getBatterMenu();
+    } else if (menu === 'runner') {
+      return this.getRunnerMenu();
+    }
+  }
+
   this.getPitcherMenu = function() {
     return [{
               action: 'strike',

@@ -1,5 +1,7 @@
 <div class="curtain" ng-if="menuActive" ng-click="$parent.menuActive = !$parent.menuActive"></div>
 
+<score-board></score-board>
+
 <div ng-show="$state.includes('game.rosters')" ui-view></div>
 <div class="roster-btn" ui-sref="game.rosters" ng-click="rostersActive = !rostersActive">Roster</div>
 
@@ -77,30 +79,31 @@
       ng-click="activateRunner()"
     ></div>
 
-    <div class=pitcher ng-click="activatePitcher()"><span>Pitch</span><img src="images/baseball-pitch.png" /></div>
+    <div class=pitcher ng-click="activateMenu('pitcher')"><span>Pitch</span><img src="images/baseball-pitch.png" /></div>
 
     <div class="home"
+    ng-model="base4"
     data-drop="true"
-    jqyoui-droppable="{onDrop: 'home()'}"
+    jqyoui-droppable="{onDrop: updateBases('run')}"
     ></div>
 
 
     <div class="single"
       ng-model="base1"
       data-drop="true"
-      jqyoui-droppable="{onDrop: 'single()'}"
+      jqyoui-droppable="{onDrop: updateBases('single', 'first')}"
     ></div>
 
     <div class="double"
       ng-model="base2"
       data-drop="true"
-      jqyoui-droppable="{onDrop: 'double()'}"
+      jqyoui-droppable="{onDrop: updateBases('double', 'second')}"
     ></div>
 
     <div class="triple"
       ng-model="base3"
       data-drop="true"
-      jqyoui-droppable="{onDrop: 'triple()'}"
+      jqyoui-droppable="{onDrop: updateBases('triple', 'third')}"
     ></div>
 
     <div class="stats">
