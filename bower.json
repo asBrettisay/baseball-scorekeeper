@@ -22,6 +22,8 @@
     "angular-dragdrop": "^1.0.13",
     "jquery": "^2.2.1",
     "jquery-ui": "^1.11.4",
-    "angular-ui-sortable": "^0.13.4"
+    "angular-ui-sortable": "^0.13.4",
+    "firebase": "^2.4.1",
+    "angularfire": "^1.1.4"
   }
 }

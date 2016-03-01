@@ -1,6 +1,38 @@
 describe('baseballScorekeeper', function() {
   beforeEach(module('baseballScorekeeper'));
 
+  describe('gameCtrl', function() {
+
+    var gameService, state, bases, action, controller, scope, teamService, teams;
+    beforeEach(inject(function(_gameService_, $controller, $rootScope, _teamService_, _teams_) {
+      scope = $rootScope.$new();
+      teamService = _teamService_;
+      teams = {team1: 'team1', team2: 'team2'}
+      controller = $controller('gameCtrl', {$scope: scope})
+    }))
+
+    it('should update runs correctly', function() {
+      state.bases.third = 'player1';
+      state.bases.atBat = 'player2';
+      state.runs = 0;
+
+      var fakeResult = {
+        bases: {
+          third: 'player2',
+        },
+        runs: 1
+      }
+
+      spyOn(gameService, 'updateBases').and.returnValue(fakeResult)
+
+
+
+      var result = scope.updateBases('single');
+
+      expect(result.runs).toEqual(1);
+    })
+  })
+
   describe('gameService', function() {
 
     var gameService, state, bases, action;

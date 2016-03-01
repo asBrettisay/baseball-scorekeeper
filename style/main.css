@@ -332,3 +332,18 @@ a {
   width: 90%;
   margin-bottom: 50px
 }
+
+.roster-item {
+  border: 1px solid black;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.debug {
+  position: absolute;
+  bottom: 0;
+}
+
+.archive-list {
+  font-size: 3em;
+}

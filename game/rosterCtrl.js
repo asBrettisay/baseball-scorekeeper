@@ -16,6 +16,7 @@ angular.module('baseballScorekeeper')
 
   $scope.changePitcherAway = function(pitcher) {
     GameState.away.activePitcher = pitcher;
+    console.log(GameState)
   }
 
 

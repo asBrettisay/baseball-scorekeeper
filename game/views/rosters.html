@@ -7,7 +7,9 @@
 
   <div class="list-roster">
     <ul ui-sortable ng-model="teams.home.players">
-      <li ng-repeat="player in teams.home.players">
+      <li
+      class="roster-item"
+      ng-repeat="player in teams.home.players">
         {{$index + 1}}: #{{player.number}} {{player.name}}
       </li>
     </ul>
@@ -39,7 +41,7 @@
     </ul>
 
       <h4>Active Pitcher</h4>
-      <li>{{GameState.away.activePitcher.name}}</li>
+      <li>{{GameState.away.activePitcher.activePitcher.name}}</li>
       <div class="btn-short">Change Pitcher</div>
       <div>
         <h4>Choose a new pitcher</h4>

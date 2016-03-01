@@ -2,7 +2,7 @@ angular.module('baseballScorekeeper')
 .service('gameService', function() {
 
   this.updateBases = function(state, bases, action) {
-
+    var runs = 0;
     var advanceBases = function() {
       bases.third = bases.second;
       bases.second = bases.first;
@@ -11,12 +11,13 @@ angular.module('baseballScorekeeper')
 
     if (action === 'run') {
       bases.third = null;
-      state.runs++;
+      runs++;
     }
 
     if (action === 'single') {
       if (bases.third) {
-        state.runs++;
+        runs++;
+        state.play = 'single';
       }
       if (bases.first) {
         advanceBases();
@@ -25,7 +26,7 @@ angular.module('baseballScorekeeper')
       bases.atBat = null;
     } else if (action === 'double') {
       if (bases.third && bases.second) {
-        state.runs++;
+        runs++;
         advanceBases();
       }
       else if (bases.second) {
@@ -36,28 +37,31 @@ angular.module('baseballScorekeeper')
         bases.first = null;
       }
       bases.second = bases.atBat;
+      state.play = 'double';
     } else if (action === 'triple') {
 
       if (bases.third) {
-        state.runs++
+        runs++
       }
       if (bases.second) {
-        state.runs++
+        runs++
       }
       if (bases.first) {
-        state.runs++
+        runs++
       }
 
       bases.third = bases.atBat;
       bases.second = null;
       bases.first = null;
+      state.play = 'triple';
     } else if (action === 'homerun') {
       bases.forEach(function(base) {
-        state.runs += 1;
+        runs += 1;
         base = null;
       })
+      state.play = 'homerun';
     }
-    return {runs: state.runs, bases: bases}
+    return {runs: runs, bases: bases}
   }
 
   this.pitch = function(action, bases, state) {
@@ -115,10 +119,12 @@ angular.module('baseballScorekeeper')
     if (action === 'flyout') {
       state.outs++;
       state.bases.atBat = null;
+      state.play = 'flyout';
     }
     else if (action === 'groundout') {
       state.outs++;
       state.bases.atBat = null;
+      state.play = 'groundout';
     }
     return state;
   }
@@ -126,7 +132,7 @@ angular.module('baseballScorekeeper')
   this.baseActivity = function(action, state, player) {
     if (action === 'steal') {
       if (state.bases.third === player) {
-        state.runs++;
+        runs++;
         state.bases.third = null;
         return state;
       }

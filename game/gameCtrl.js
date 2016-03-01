@@ -1,16 +1,33 @@
 angular.module('baseballScorekeeper')
-.controller('gameCtrl', function($scope, teams, gameService, menuService, GameState) {
+.controller('gameCtrl', function($scope, teams, gameService, menuService, GameState, fb, gameObj, $stateParams) {
 
-  $scope.battingIndex = 0;
-  $scope.runs = 0;
+  $scope.ref = gameObj;
+  console.log(gameObj)
+
+  $scope.plays = $scope.ref.child('plays');
+
+  $scope.battingTeam = 'away';
   $scope.gameState = {
     pitchCount: 0,
     strikes: 0,
     balls: 0,
     outs: 0,
-    runs: 0,
     bases: {},
   }
+
+  var teams = teams;
+
+
+  $scope.gameState.home = teams.home;
+  $scope.gameState.away = teams.away;
+
+  $scope.gameState.away.battingIndex = 0;
+  $scope.gameState.home.battingIndex = 0;
+  $scope.gameState.away.runs = 0;
+  $scope.gameState.home.runs = 0;
+
+  $scope.gameState.bases.atBat = $scope.gameState[$scope.battingTeam].players[0];
+
 
   $scope.menuActive = false;
   $scope.batterActive = false;
@@ -18,7 +35,7 @@ angular.module('baseballScorekeeper')
   $scope.updateBases = function(action) {
     var result = gameService.updateBases($scope.gameState, $scope.gameState.bases, action);
     $scope.bases = result.bases.bases;
-    $scope.gameState.runs = result.runs;
+    $scope.gameState[$scope.battingTeam].runs += result.runs;
   }
 
   $scope.single = function() {
@@ -55,13 +72,23 @@ angular.module('baseballScorekeeper')
   }
 
   $scope.newBatter = function() {
-    $scope.battingIndex++;
-    if ($scope.battingIndex > 8) {
-      $scope.battingIndex = 0;
+
+    $scope.gameState[$scope.battingTeam].battingIndex++;
+
+
+    if ($scope.gameState[$scope.battingTeam].battingIndex > 8) {
+      $scope.gameState[$scope.battingTeam].battingIndex = 0;
     }
-    $scope.gameState.bases.atBat = $scope.gameState.battingTeam.players[$scope.battingIndex]
+
+    var i = $scope.gameState[$scope.battingTeam].battingIndex;
+
+    $scope.gameState.bases.atBat = $scope.gameState[$scope.battingTeam].players[i];
+
 
     $scope.batterActive = true;
+
+    $scope.plays.push($scope.gameState);
+    console.log($scope.gameState)
   }
 
 
@@ -74,13 +101,21 @@ angular.module('baseballScorekeeper')
     $scope.activePlayer = player;
   })
 
+  $scope.$watch('gameState.outs', function() {
+    if ($scope.gameState.outs > 2) {
+      retireSide();
+    }
+  })
+
   $scope.pitch = function(args) {
     var result = gameService.pitch(args, $scope.gameState.bases, $scope.gameState)
-    $scope.gamestate = result.state;
+    $scope.gameState = result.state;
     $scope.gameState.bases = result.bases;
     $scope.menuActive = false;
+    if ($scope.gameState.bases.atBat === null) {
+      $scope.batterActive = false;
+    }
     $scope.$apply();
-    console.log($scope.gameState)
   }
 
   $scope.ballInPlay = function(args) {
@@ -89,6 +124,18 @@ angular.module('baseballScorekeeper')
     $scope.batterActive = false;
     $scope.$apply();
     console.log($scope.gameState);
+  }
+
+  function retireSide() {
+    $scope.gameState.bases = {};
+    $scope.gameState.balls = 0;
+    $scope.gameState.strikes = 0;
+    $scope.gameState.outs = 0;
+    if ($scope.battingTeam === 'away') {
+      $scope.battingTeam = 'home';
+    } else {
+      $scope.battingTeam = 'away';
+    }
   }
 
   $scope.activatePitcher = function() {
@@ -110,19 +157,4 @@ angular.module('baseballScorekeeper')
     $scope.menuActive = false;
     $scope.gameState = gameService.baseActivity(action, $scope.gameState, $scope.activePlayer);
   }
-
-  $scope.teams = teams;
-
-
-
-  $scope.gameState.home = $scope.teams.home;
-  $scope.gameState.visitor = $scope.teams.away;
-
-  $scope.gameState.battingTeam = $scope.gameState.visitor;
-  // $scope.gameState.pitcher = $scope.gameState.visitor.activePitcher;
-
-  // GameState.battingTeam = $scope.gameState.visitor;
-
-  $scope.gameState.bases.atBat = $scope.gameState.battingTeam[0];
-
 })

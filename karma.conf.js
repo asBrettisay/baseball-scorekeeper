@@ -22,6 +22,8 @@ module.exports = function(config) {
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-dragdrop/src/angular-dragdrop.js',
       'bower_components/angular-ui-sortable/sortable.js',
+      'bower_components/firebase/firebase.js',
+      'bower_components/angularfire/dist/angularfire.js',
       'app.js',
       'game/gameCtrl.js',
       'game/directives/playerBatter.js',

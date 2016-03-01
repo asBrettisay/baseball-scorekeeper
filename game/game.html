@@ -104,12 +104,12 @@
     ></div>
 
     <div class="stats">
-      <h1>Runs: {{gameState.runs}}</h1>
+      <h1>Runs: {{gameState[battingTeam].runs}}</h1>
       <h1>Outs: {{gameState.outs}}</h1>
       <h1>Strikes: {{gameState.strikes}}</h1>
       <h1>Balls: {{gameState.balls}}</h1>
       <h1>Pitch Count: {{gameState.pitchCount}}</h1>
-      <h1>Pitcher: {{GameState.away.activePitcher}}</h1>
+      <h1>Pitcher: {{activePitcher.activePitcher.name}}</h1>
     </div>
 
     <!-- Base Paths -->
