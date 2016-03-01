@@ -10,7 +10,7 @@ angular.module('baseballScorekeeper', ['ui.router', 'ngDragDrop', 'ui.sortable',
       templateUrl: 'home/home.html'
     })
     .state('game', {
-      url: '/game/:game',
+      url: '/game/:game/:play',
       templateUrl: '/game/game.html',
       controller: 'gameCtrl',
       resolve: {
@@ -20,8 +20,9 @@ angular.module('baseballScorekeeper', ['ui.router', 'ngDragDrop', 'ui.sortable',
         gameObj: function(archiveService, $stateParams) {
           if ($stateParams.game === 'new') {
             return archiveService.newGame();
+          } else {
+            return archiveService.getGameState($stateParams.game, $stateParams.play)
           }
-          console.log($stateParams)
         }
       }
     })
@@ -43,13 +44,15 @@ angular.module('baseballScorekeeper', ['ui.router', 'ngDragDrop', 'ui.sortable',
     .state('archiveDetail', {
       url: '/archive/:gameId',
       templateUrl: '/archive/views/detail.html',
-      // controller: function($scope, game) {
-      //   $scope.game = game;
-      // },
-      // resolve: {
-      //   game: function(archiveService, $stateParams) {
-      //     return archiveService.getGame($stateParams.gameId)
-      //   }
-      // }
+      controller: function($scope, game, $firebaseObject, $firebaseArray) {
+        $scope.game = $firebaseObject(game);
+        $scope.playsRef = game.child('plays');
+        $scope.plays = $firebaseArray($scope.playsRef);
+      },
+      resolve: {
+        game: function(archiveService, $stateParams) {
+          return archiveService.getGame($stateParams.gameId)
+        }
+      }
     })
 })

@@ -1,1 +1,12 @@
 <h1>Detail View</h1>
+
+<ul>
+  <li class="archive-list" ng-repeat="action in plays">
+    <a
+    ui-sref="game({game: game.$id, play: action.$id})"
+    >
+      {{action.$id}}
+    </a>
+    <br>{{action.bases}}
+  </li>
+</ul>

@@ -1,36 +1,47 @@
 angular.module('baseballScorekeeper')
-.controller('gameCtrl', function($scope, teams, gameService, menuService, GameState, fb, gameObj, $stateParams) {
-
-  $scope.ref = gameObj;
-  console.log(gameObj)
-
-  $scope.plays = $scope.ref.child('plays');
-
-  $scope.battingTeam = 'away';
-  $scope.gameState = {
-    pitchCount: 0,
-    strikes: 0,
-    balls: 0,
-    outs: 0,
-    bases: {},
-  }
-
-  var teams = teams;
+.controller('gameCtrl', function($scope, teams, gameService, menuService, GameState, fb, gameObj, $stateParams, $firebaseObject, $firebaseArray) {
 
 
-  $scope.gameState.home = teams.home;
-  $scope.gameState.away = teams.away;
+  if (!$stateParams.play) {
+    $scope.battingTeam = 'away';
+    $scope.gameState = {
+      pitchCount: 0,
+      strikes: 0,
+      balls: 0,
+      outs: 0,
+      bases: {},
+    }
+    var teams = teams
 
-  $scope.gameState.away.battingIndex = 0;
-  $scope.gameState.home.battingIndex = 0;
-  $scope.gameState.away.runs = 0;
-  $scope.gameState.home.runs = 0;
+    $scope.batterActive = false;
 
-  $scope.gameState.bases.atBat = $scope.gameState[$scope.battingTeam].players[0];
+
+
+    $scope.gameState.home = teams.home;
+    $scope.gameState.away = teams.away;
+
+    $scope.gameState.away.battingIndex = 0;
+    $scope.gameState.home.battingIndex = 0;
+    $scope.gameState.away.runs = 0;
+    $scope.gameState.home.runs = 0;
+
+    $scope.gameState.bases.atBat = $scope.gameState[$scope.battingTeam].players[0];
+
+    } else {
+
+      $scope.gameState = {};
+      var gameObj = gameObj.$ref();
+      var bases = $firebaseObject(gameObj.child('bases'));
+      $scope.gameState.bases = bases;
+      console.log($scope.gameState);
+
+    }
+
+
+
 
 
   $scope.menuActive = false;
-  $scope.batterActive = false;
 
   $scope.updateBases = function(action) {
     var result = gameService.updateBases($scope.gameState, $scope.gameState.bases, action);

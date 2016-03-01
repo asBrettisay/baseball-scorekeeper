@@ -5,7 +5,8 @@ angular.module('baseballScorekeeper')
   var archive = ref.child('archive');
 
   this.newGame = function() {
-    return archive.push();
+    var game = archive.push();
+    return {game: game};
   }
 
   this.getArchive = function() {
@@ -20,7 +21,20 @@ angular.module('baseballScorekeeper')
     var defer = $q.defer();
     var game = archive.child(id);
     defer.resolve(game);
+
     return defer.promise;
+  }
+
+  this.getGameState = function(id, play) {
+    var defer = $q.defer();
+    var game = archive.child(id);
+    var play = $firebaseObject(game.child(play));
+    play.$loaded().then(function(data) {
+      defer.resolve(data);
+    })
+
+    return defer.promise;
+
   }
 
 })
