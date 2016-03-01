@@ -53,6 +53,11 @@ angular.module('baseballScorekeeper')
         action: 'groundout',
         title: 'Groundout',
         callback: 'ballInPlay',
+      },
+      {
+        action: 'hitByPitch',
+        title: 'Hit By Pitch',
+        callback: 'updateBases'
       }]
     };
 

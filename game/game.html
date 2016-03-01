@@ -1,22 +1,10 @@
 <div class="curtain" ng-if="menuActive" ng-click="$parent.menuActive = !$parent.menuActive"></div>
 
-<score-board></score-board>
+<score-board game-state="gameState"></score-board>
 
 <div ng-show="$state.includes('game.rosters')" ui-view></div>
 <div class="roster-btn" ui-sref="game.rosters" ng-click="rostersActive = !rostersActive">Roster</div>
 
-
-
-<!-- Pitching Menu -->
-<!-- <div class="game-menu" ng-if="menuActive" >
-  <div pitching-option action="strike" class="btn">Strike</div>
-  <div pitching-option action="ball" class="btn">Ball</div>
-  <div pitching-option action="wildPitch" class="btn">Wild Pitch</div>
-  <div pitching-option action="passedBall" class="btn">Passed Ball</div>
-</div> -->
-
-<!-- Game Menu -->
-<!-- <div class="game-menu" ng-if="menuActive" ng-repeat="option in menuOptions"> -->
 <div class="game-menu" ng-if="menuActive">
   <div class="btn" scope="option" ng-repeat="option in menuOptions"  menu-option></div>
 </div>
@@ -35,7 +23,7 @@
     <div player-batter
       ng-if="batterActive"
       player-object="gameState.bases.atBat"
-      ng-click="activateBatter()"
+      ng-click="activateMenu('batter')"
       ng-model="player1"
       class="player"
       data-drag="true"
@@ -81,46 +69,121 @@
 
     <div class=pitcher ng-click="activateMenu('pitcher')"><span>Pitch</span><img src="images/baseball-pitch.png" /></div>
 
-    <div class="home"
+    <div class="tada animated home"
     ng-model="base4"
+    ng-show="runnerThird"
     data-drop="true"
     jqyoui-droppable="{onDrop: updateBases('run')}"
     ></div>
+    <div class="tada animated home-text" ng-show="runnerThird">RUN HOME!</div>
 
 
-    <div class="single"
+    <div class="tada single animated"
       ng-model="base1"
+      ng-show="showBoxes"
       data-drop="true"
       jqyoui-droppable="{onDrop: updateBases('single', 'first')}"
     ></div>
+    <div ng-show="showBoxes && batterSelected" class="animated tada single-text">Single!</div>
 
-    <div class="double"
+
+    <div class="tada double animated"
       ng-model="base2"
+      ng-show="showBoxes"
       data-drop="true"
       jqyoui-droppable="{onDrop: updateBases('double', 'second')}"
     ></div>
+    <div ng-show="showBoxes && batterSelected" class="animated tada double-text">Double!</div>
 
-    <div class="triple"
+
+    <div class="tada triple animated"
       ng-model="base3"
+      ng-show="showBoxes"
       data-drop="true"
       jqyoui-droppable="{onDrop: updateBases('triple', 'third')}"
     ></div>
+    <div ng-show="showBoxes && batterSelected" class="animated tada triple-text">Triple!</div>
+
+
+    <balls-and-strikes class="ballsAndStrikes" game-state="gameState"></balls-and-strikes>
 
     <div class="stats">
-      <h1>Runs: {{gameState[battingTeam].runs}}</h1>
-      <h1>Outs: {{gameState.outs}}</h1>
-      <h1>Strikes: {{gameState.strikes}}</h1>
-      <h1>Balls: {{gameState.balls}}</h1>
+      <br><br>
       <h1>Pitch Count: {{gameState.pitchCount}}</h1>
       <h1>Pitcher: {{activePitcher.activePitcher.name}}</h1>
     </div>
 
     <!-- Base Paths -->
+    <div class="base-surface">
+      <figure class="surface-left">
+      </figure>
+      <figure class="surface-right">
+      </figure>
+    </div>
     <div class="base-paths">
-      <div class="base" id="base-1"></div>
-      <div class="base" id="base-2"></div>
-      <div class="base" id="base-3"></div>
-      <div class="base" id="base-4"></div>
+
+        <div class="base" id="base-1">
+          <div class="cube">
+            <figure class="front">
+            </figure>
+            <figure class="back">
+            </figure>
+
+            <figure class="right"></figure>
+            <figure class="left">
+            </figure>
+            <figure class="top"></figure>
+            <figure class="bottom"></figure>
+          </div>
+
+        </div>
+        <div class="base" id="base-2">
+          <div class="cube">
+            <figure class="front">
+            </figure>
+            <figure class="back">
+            </figure>
+
+            <figure class="right"></figure>
+            <figure class="left">
+            </figure>
+            <figure class="top"></figure>
+            <figure class="bottom"></figure>
+          </div>
+
+        </div>
+
+        <div class="base" id="base-3">
+          <div class="cube">
+            <figure class="front">
+            </figure>
+            <figure class="back">
+            </figure>
+
+            <figure class="right"></figure>
+            <figure class="left">
+            </figure>
+            <figure class="top"></figure>
+            <figure class="bottom"></figure>
+          </div>
+
+        </div>
+        <div class="base" id="base-4">
+          <div class="cube">
+            <figure class="front">
+            </figure>
+            <figure class="back">
+            </figure>
+
+            <figure class="right"></figure>
+            <figure class="left">
+            </figure>
+            <figure class="top"></figure>
+            <figure class="bottom"></figure>
+          </div>
+
+        </div>
+
     </div>
 
   </section>

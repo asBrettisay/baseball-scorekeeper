@@ -15,6 +15,9 @@ angular.module('baseballScorekeeper')
       element.on('mousedown', function() {
         scope.$emit('playerActive', scope.player);
       })
+      element.on('mouseup', function() {
+        scope.$emit('playerInactive');
+      })
     }
   }
 });

@@ -1,5 +1,5 @@
 angular.module('baseballScorekeeper')
-.controller('gameCtrl', function($scope, teams, gameService, menuService, GameState, fb, gameObj, $stateParams, $firebaseObject, $firebaseArray) {
+.controller('gameCtrl', function($scope, teams, gameService, menuService, GameState, fb, gameObj, $stateParams, $firebaseObject, $firebaseArray, $rootScope) {
 
   $scope.plays = gameObj.child('plays');
   $scope.battingTeam = 'away';
@@ -7,13 +7,12 @@ angular.module('baseballScorekeeper')
   $scope.gameState = gameService.initializeGameState(teams);
   $scope.menuActive = false;
 
-
-
   $scope.updateBases = function(action, base) {
     if ($scope.gameState.bases.atBat === $scope.activePlayer) {
       var runs = gameService.updateBases($scope.gameState, $scope.gameState.bases, action);
       if (runs) {
         $scope.gameState[$scope.battingTeam].runs += runs;
+        $scope.gameState.scoreArr[$scope.gameState.scoreIndex] += runs;
       }
       $scope.batterActive = false;
     }
@@ -35,8 +34,8 @@ angular.module('baseballScorekeeper')
     }
     $scope.gameState.bases.atBat = b.players[b.battingIndex];
     $scope.batterActive = true;
-    $scope.plays.push($scope.gameState);
-    $scope.plays.push('test');
+    // $scope.plays.push($scope.gameState);
+    // $scope.plays.push('test');
     console.log($scope.gameState)
   }
 
@@ -66,7 +65,6 @@ angular.module('baseballScorekeeper')
     $scope.menuActive = false;
     $scope.batterActive = false;
     $scope.$apply();
-    console.log($scope.gameState);
   }
 
   function retireSide() {
@@ -76,6 +74,7 @@ angular.module('baseballScorekeeper')
     } else {
       $scope.battingTeam = 'away';
     }
+    $scope.gameState.scoreIndex++;
   }
 
   //Listeners.
@@ -85,6 +84,20 @@ angular.module('baseballScorekeeper')
 
   $scope.$on('playerActive', function(e, player) {
     $scope.activePlayer = player;
+    if (player === $scope.gameState.bases.atBat) {
+      $scope.batterSelected = true;
+    }
+    if (player === $scope.gameState.bases.third) {
+      $scope.runnerThird = true;
+    }
+    $scope.showBoxes = true;
+    $scope.$apply();
+  })
+
+  $scope.$on('playerInactive', function(e) {
+    $scope.showBoxes = false;
+    $scope.batterSelected = false;
+    $scope.runnerThird = false;
   })
 
   $scope.$watch('gameState.outs', function() {

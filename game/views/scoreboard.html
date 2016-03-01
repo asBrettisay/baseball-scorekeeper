@@ -1,25 +1,106 @@
 <div class="scoreboard">
   <div class="small-row">
     <div class="team-col" id="teams-smaller-font">
-      Teams
+
     </div>
     <div class="inning-col">
       1
     </div>
+    <div class="inning-col">
+      2
+    </div>
+    <div class="inning-col">
+      3
+    </div>
+    <div class="inning-col">
+      4
+    </div>
+    <div class="inning-col">
+      5
+    </div>
+    <div class="inning-col">
+      6
+    </div>
+    <div class="inning-col">
+      7
+    </div>
+    <div class="inning-col">
+      8
+    </div>
+    <div class="inning-col">
+      9
+    </div>
+    <div class="runs-col">
+      R
+    </div>
   </div>
 <div class="row">
   <div class="team-col">
-    HOME
+    AWAY
   </div>
-  <div class="inning-col">
+  <div class="inning-col" ng-bind="scoreArr[0]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[2]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[4]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[6]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[8]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[10]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[12]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[14]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[16]">
+    0
+  </div>
+  <div class="runs-col" ng-bind="awayScore">
     0
   </div>
 </div>
 <div class="row">
   <div class="team-col">
-    AWAY
+    HOME
   </div>
-  <div class="inning-col">
+  <div class="inning-col" ng-bind="scoreArr[1]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[3]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[5]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[7]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[9]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[11]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[13]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[15]">
+    0
+  </div>
+  <div class="inning-col" ng-bind="scoreArr[17]">
+    0
+  </div>
+  <div class="runs-col" ng-bind="homeScore">
     0
   </div>
 </div>

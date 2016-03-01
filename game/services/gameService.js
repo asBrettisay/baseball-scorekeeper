@@ -169,15 +169,22 @@ angular.module('baseballScorekeeper')
     teams.away.battingIndex = 0;
     teams.away.runs = 0;
 
+    for (var i = 0, scoreArr = []; i < 18; i++) {
+      scoreArr.push(0);
+    }
+
     return {
+      scoreIndex: 0,
       pitchCount: 0,
       strikes: 0,
       balls: 0,
       outs: 0,
       bases: {},
       home: teams.home,
-      away: teams.away
+      away: teams.away,
+      scoreArr: scoreArr
     }
+
   }
 
   this.retireSide = function(state) {

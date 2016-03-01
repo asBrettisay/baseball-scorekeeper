@@ -110,13 +110,28 @@ a {
   height: 100%;
   width: 175px;
   display: inline-block;
+  float: left;
 }
 
 .scoreboard .inning-col {
-  height: 100%;
-  display: inline-block;
+  max-height: 5vh;
+  width: 50px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   float: left;
-  position: absolute;
+  position: relative;
+}
+
+.scoreboard .runs-col {
+  max-height: 5vh;
+  width: 100px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  position: relative;
+  border-left: 1px solid #000;
 }
 
 #teams-smaller-font {
@@ -139,17 +154,99 @@ a {
   height: 600px;
   width: 600px;
   transform: rotate(45deg) translate(-50%, -50%);
-  border: 10px solid black;
   position: absolute;
   bottom: -25%;
   left: 19%;
+  transform-style: preserve-3d;
+}
+
+.base-surface {
+  height: 680px;
+  width: 680px;
+  position: absolute;
+  bottom: 6%;
+  left: 15%;
+  background-image: url('../images/k30954002.jpg');
+  position: absolute;
+  transform: rotateY(0deg) rotateX(-28deg) rotateZ(45deg);
+  display:block;
+  margin:0;
+  transform-style: preserve-3d;
+}
+
+.surface-left {
+  background-color: #643609;
+  transform: translateY(649px) translateX(19px) rotateX(90deg);
+  width: 680px;
+  height: 100px;
+  margin: 0;
+  position: absolute;
+  display: block;
+}
+
+.surface-right {
+  background-color: #643609;
+  transform: translateX(357px) translateY(307px) rotateY(-90deg) rotateZ(-90deg);
+  width:680px;
+  height:100px;
+  margin:0;
+  position:absolute;
+  display:block;
 }
 
 .base {
   height: 80px;
   width: 80px;
-  background-color: black;
 }
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(-20deg) rotateX(20deg) rotateZ(-4deg);
+}
+
+.cube figure {
+  width: 78px;
+  height: 78px;
+  display: block;
+  position: absolute;
+  margin: 0;
+}
+
+.cube .front {
+  transform: rotateY(0deg) translateZ(40px);
+  background-color: white;
+}
+
+.cube .back {
+  transform: rotateX(180deg) translateZ(40px);
+  background-color: none;
+}
+
+.cube .right {
+  transform: rotateY(90deg) translateZ(51px) translateY(-8px);
+  background-color: black;
+  width:40px;
+}
+
+.cube .left {
+  transform: rotateY(-90deg) translateZ(40px);
+  background-color: none;
+}
+
+.cube .top {
+  transform: rotateX(90deg) translateZ(40px);
+  background-color: none;
+
+}
+.cube .bottom {
+  transform: rotateX(-90deg) translateZ(51px) translateX(-7px);
+  background-color: black;
+  height: 40px;
+}
+
 
 #base-1 {
   position: absolute;
@@ -158,9 +255,9 @@ a {
 }
 
 #base-2 {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
+  top: 20px;
+  left: 20px;
 }
 
 #base-3 {
@@ -196,33 +293,140 @@ a {
 
 .single {
   border: 5px solid black;
-  height: 400px;
+  background-color: #000;
+  border-radius: 25px;
+  font-size: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: .8;
+  color: #fff;
+  height: 300px;
   width: 300px;
   position: absolute;
-  right: 0;
+  right: 25px;
   top: 50%;
+  z-index: 1;
+}
+
+.single-text {
+  font-size: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  z-index: 1;
 }
 
 .double {
   border: 5px solid black;
+  background-color: #000;
+  border-radius: 10px;
+  font-size: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: .8;
+  color: #fff;
   height: 300px;
-  width: 400px;
+  width: 300px;
   position: absolute;
-  right: 30%;
+  left: 34%;
   top: 25%;
+  z-index: 1;
+}
+
+.double-text {
+  font-size: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  left: 34%;
+  top: 25%;
+  z-index: 1;
 }
 
 .triple {
   border: 5px solid black;
-  height: 400px;
+  background-color: #000;
+  border-radius: 10px;
+  font-size: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: .8;
+  color: #fff;
+  height: 300px;
   width: 300px;
   position: absolute;
-  left: 0;
+  left: 25px;
   top: 50%;
+  z-index: 1;
+}
+
+.triple-text{
+  font-size: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  z-index: 1;
 }
 
 .home {
   border: 5px solid black;
+  background-color: #000;
+  border-radius: 10px;
+  font-size: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: .8;
+  color: #fff;
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  left: 25px;
+  bottom: 50%;
+}
+
+.home-text {
+  color: #fff;
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  z-index: 5;
+  bottom: 50%;
+  left: 25px;
+  font-size: 5em;
+}
+
+
+
+.home {
+  border: 5px solid black;
+  background-color: #000;
+  border-radius: 10px;
+  font-size: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: .8;
+  color: #fff;
   height: 300px;
   width: 300px;
   position: absolute;
@@ -249,6 +453,8 @@ a {
   position: absolute;
   top: 64%;
   left: 50%;
+  box-shadow: 10px 10px 18px 0px rgba(0,0,0,0.75);
+  border-radius: 25%;
   transform: translate(-50%, -50%);
   z-index: 1;
 }
@@ -307,6 +513,49 @@ a {
   width: 100vw;
 }
 
+.ballsAndStrikes {
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+}
+
+.strikes-row {
+  width: 150px;
+  height: 50px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 3em;
+}
+
+.balls-row {
+  width: 200px;
+  height: 50px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 3em;
+}
+
+.outs-row {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 3em;
+}
+
+.strike {
+  border: 3px solid #000;
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  border-radius: 30px;
+}
+
 .blur {
   -webkit-filter: blur(5px);
   filter: blur(5px);
@@ -340,7 +589,11 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1
+  z-index: 1;
+  -webkit-box-shadow: 10px 10px 25px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 25px -1px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 25px -1px rgba(0,0,0,0.75);
+
 }
 
 .roster-btn:active {
