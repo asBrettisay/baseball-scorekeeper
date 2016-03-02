@@ -17,11 +17,11 @@ angular.module('baseballScorekeeper')
     if (action === 'single') {
       if (bases.third) {
         runs++;
-        state.play = 'single';
       }
       if (bases.first) {
         advanceBases();
       }
+      state.play = 'Single!';
       bases.first = bases.atBat;
       bases.atBat = null;
     } else if (action === 'double') {
@@ -37,7 +37,7 @@ angular.module('baseballScorekeeper')
         bases.first = null;
       }
       bases.second = bases.atBat;
-      state.play = 'double';
+      state.play = 'Double!';
     } else if (action === 'triple') {
 
       if (bases.third) {
@@ -53,18 +53,29 @@ angular.module('baseballScorekeeper')
       bases.third = bases.atBat;
       bases.second = null;
       bases.first = null;
-      state.play = 'triple';
+      state.play = 'Triple!';
     } else if (action === 'homerun') {
-      bases.forEach(function(base) {
-        runs += 1;
-        base = null;
-      })
-      state.play = 'homerun';
+            runs++
+            if (bases.third) {
+              runs++
+            }
+            if (bases.second) {
+              runs++
+            }
+            if (bases.first) {
+              runs++
+            }
+            bases.third = null;
+            bases.second = null;
+            bases.first = null;
+            state.play = 'Home Run!';
     }
     return runs
   }
 
   this.pitch = function(action, bases, state) {
+
+    state.play = null;
 
     function wildPitchAction() {
       if (bases.third) {
@@ -88,9 +99,11 @@ angular.module('baseballScorekeeper')
       state.strikes = 0;
       state.balls = 0;
       bases.atBat = null;
+      state.play = 'Strikeout!';
     } else if (state.balls === 4) {
       bases.first = bases.atBat;
       bases.atBat = null;
+      state.play = 'Base on balls!'
     }
 
     if (action === "foul") {

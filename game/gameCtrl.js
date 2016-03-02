@@ -1,5 +1,5 @@
 angular.module('baseballScorekeeper')
-.controller('gameCtrl', function($scope, teams, gameService, menuService, GameState, fb, gameObj, $stateParams, $firebaseObject, $firebaseArray, $rootScope) {
+.controller('gameCtrl', function($scope, teams, gameService, menuService, GameState, fb, gameObj, $stateParams, $firebaseObject, $firebaseArray, $rootScope, $timeout) {
 
   $scope.plays = gameObj.child('plays');
   $scope.battingTeam = 'away';
@@ -15,6 +15,7 @@ angular.module('baseballScorekeeper')
         $scope.gameState.scoreArr[$scope.gameState.scoreIndex] += runs;
       }
       $scope.batterActive = false;
+      $scope.showMessage($scope.gameState.play);
     }
     else if (base && ($scope.activePlayer !== $scope.gameState.bases[base])) {
       gameService.movePlayer($scope.activePlayer, base, $scope.gameState)
@@ -36,16 +37,18 @@ angular.module('baseballScorekeeper')
     $scope.batterActive = true;
     // $scope.plays.push($scope.gameState);
     // $scope.plays.push('test');
-    console.log($scope.gameState)
   }
 
   $scope.pitch = function(args) {
     var result = gameService.pitch(args, $scope.gameState.bases, $scope.gameState)
-    $scope.gameState = result.state;
-    $scope.gameState.bases = result.bases;
+    // $scope.gameState = result.state;
+    // $scope.gameState.bases = result.bases;
     $scope.menuActive = false;
     if ($scope.gameState.bases.atBat === null) {
       $scope.batterActive = false;
+    }
+    if ($scope.gameState.play) {
+      $scope.showMessage($scope.gameState.play);
     }
     $scope.$apply();
   }
@@ -105,5 +108,13 @@ angular.module('baseballScorekeeper')
       retireSide();
     }
   })
+
+  $scope.showMessage = function(message) {
+    $scope.alertMessage = message;
+    $scope.messageShow = true;
+    $timeout(function() {
+      $scope.messageShow = false;
+    }, 2000)
+  }
 
 })

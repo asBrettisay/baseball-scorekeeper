@@ -36,6 +36,18 @@ a {
   transform: translate(0, -50%);
 }
 
+.message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 8em;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  z-index: 10;
+}
+
+
 .btn {
   width: 900px;
   height: 150px;
@@ -385,6 +397,28 @@ a {
   left: 25px;
   top: 50%;
   z-index: 1;
+}
+
+.homerun {
+  border: 5px solid black;
+  width: 80%;
+  height: 20%;
+  position: absolute;
+  top: 6%;
+  left: 10%;
+  z-index: 9;
+  border-radius: 10px;
+  background-color: black;
+  opacity: 0.8;
+}
+
+.homerun-text {
+  font-size: 8em;
+  position: absolute;
+  top: 10%;
+  left: 17%;
+  color: white;
+  z-index: 10;
 }
 
 .home {

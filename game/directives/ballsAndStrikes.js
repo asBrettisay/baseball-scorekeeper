@@ -14,7 +14,6 @@ angular.module('baseballScorekeeper')
       $scope.ball3 = {};
 
       $scope.$watch('state.strikes', function() {
-        console.log('Strikes', $scope.state.strikes)
         if ($scope.state.strikes === 1) {
           $scope.strike1 = {'background-color': 'red'};
         }

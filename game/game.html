@@ -1,6 +1,13 @@
-<div class="curtain" ng-if="menuActive" ng-click="$parent.menuActive = !$parent.menuActive"></div>
+<div class="message" ng-if="messageShow">
+  <div class="animated bounceIn" ng-bind="alertMessage">
+  </div>
+</div>
+
+<div class="curtain" ng-if="menuActive || messageShow" ng-click="$parent.menuActive = !$parent.menuActive"></div>
 
 <score-board game-state="gameState"></score-board>
+
+
 
 <div ng-show="$state.includes('game.rosters')" ui-view></div>
 <div class="roster-btn" ui-sref="game.rosters" ng-click="rostersActive = !rostersActive">Roster</div>
@@ -101,6 +108,13 @@
       ng-show="showBoxes"
       data-drop="true"
       jqyoui-droppable="{onDrop: updateBases('triple', 'third')}"
+    ></div><div class="homerun-text tada animated" ng-show="showBoxes">Home Run!</div>
+
+    <div class="tada homerun animated"
+    ng-model="homerunbase"
+    ng-show="showBoxes"
+    data-drop="true"
+    jqyoui-droppable="{onDrop: updateBases('homerun')}"
     ></div>
     <div ng-show="showBoxes && batterSelected" class="animated tada triple-text">Triple!</div>
 
