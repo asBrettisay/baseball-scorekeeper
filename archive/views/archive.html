@@ -3,6 +3,6 @@
 <div class='archive-list'>
   <h3>Game: {{game.$id}}</h3>
   <ul>
-    <li ng-repeat="game in archive"><a ui-sref="archiveDetail({gameId: game.$id})">Game: {{game.$id}}</a></li>
+    <li ng-repeat="game in archive"><a ui-sref="game({game: game.$id})"><score-board class="archive-score" game-state="game"></score-board></a></li>
   </ul>
 </div>

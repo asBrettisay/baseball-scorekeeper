@@ -21,7 +21,7 @@ angular.module('baseballScorekeeper', ['ui.router', 'ngDragDrop', 'ui.sortable',
           if ($stateParams.game === 'new') {
             return archiveService.newGame();
           } else {
-            return archiveService.getGameState($stateParams.game, $stateParams.play)
+            return archiveService.getGameState($stateParams.game)
           }
         }
       }

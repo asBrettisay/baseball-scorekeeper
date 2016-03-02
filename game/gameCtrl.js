@@ -1,7 +1,7 @@
 angular.module('baseballScorekeeper')
 .controller('gameCtrl', function($scope, teams, gameService, menuService, GameState, fb, gameObj, $stateParams, $firebaseObject, $firebaseArray, $rootScope, $timeout) {
 
-  $scope.plays = gameObj.child('plays');
+  $scope.gameRef = gameObj
   $scope.battingTeam = 'away';
   var teams = teams
   $scope.gameState = gameService.initializeGameState(teams);
@@ -45,6 +45,7 @@ angular.module('baseballScorekeeper')
     }
     $scope.gameState.bases.atBat = b.players[b.battingIndex];
     $scope.batterActive = true;
+    $scope.gameRef.set($scope.gameState);
   }
 
   $scope.pitch = function(args) {

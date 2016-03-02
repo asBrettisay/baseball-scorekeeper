@@ -682,3 +682,11 @@ a {
 .archive-list {
   font-size: 3em;
 }
+
+.archive-list ul {
+  list-style-type: none;
+}
+
+.archive-score {
+  font-size: 15px;
+}
