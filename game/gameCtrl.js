@@ -27,7 +27,6 @@ angular.module('baseballScorekeeper')
 
     else if (action === 'run') {
       gameService.updateBases(g, 'run');
-      // $scope.gameState[$scope.battingTeam].runs += runs;
       $scope.showMessage($scope.gameState.play);
     }
 
