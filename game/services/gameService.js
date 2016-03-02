@@ -1,38 +1,62 @@
 angular.module('baseballScorekeeper')
 .service('gameService', function() {
 
-  this.updateBases = function(state, bases, action) {
-    var runs = 0;
+
+
+  this.updateBases = function(state, action) {
+    var runs = state.scoreArr;
+    var i = state.scoreIndex;
+    var bases = state.bases;
+    state.play = null;
+
+
     var advanceBases = function() {
+      if (bases.third && bases.second && bases.first) {
+        runs[i]++;
+      }
       bases.third = bases.second;
       bases.second = bases.first;
       bases.first = null;
     }
 
+
+
     if (action === 'run') {
+      // Run scored from third.
       bases.third = null;
-      runs++
+      runs[i]++;
       state.play = 'Run scored!';
     }
 
+
+
     if (action === 'single') {
-      if (bases.third) {
-        runs++;
-      }
+
       if (bases.first) {
         advanceBases();
       }
+
+
       state.play = 'Single!';
       bases.first = bases.atBat;
       bases.atBat = null;
-    } else if (action === 'double') {
+    }
+
+
+
+    if (action === 'double') {
+
       if (bases.third && bases.second) {
         runs++;
         advanceBases();
       }
+
+
       else if (bases.second) {
         bases.third = bases.second;
       }
+
+
       if (bases.first) {
         bases.third = bases.first;
         bases.first = null;
@@ -40,7 +64,11 @@ angular.module('baseballScorekeeper')
       bases.second = bases.atBat;
       bases.atBat = null;
       state.play = 'Double!';
-    } else if (action === 'triple') {
+    }
+
+
+
+    if (action === 'triple') {
 
       if (bases.third) {
         runs++
@@ -57,7 +85,11 @@ angular.module('baseballScorekeeper')
       bases.first = null;
       bases.atBat = null;
       state.play = 'Triple!';
-    } else if (action === 'homerun') {
+    }
+
+
+
+    if (action === 'homerun') {
             runs++
             if (bases.third) {
               runs++
@@ -75,6 +107,10 @@ angular.module('baseballScorekeeper')
     }
     return runs
   }
+
+
+
+
 
   this.pitch = function(action, bases, state) {
 
@@ -185,7 +221,7 @@ angular.module('baseballScorekeeper')
     teams.away.battingIndex = 0;
     teams.away.runs = 0;
 
-    for (var i = 0, scoreArr = []; i < 18; i++) {
+    for (var j = 0, scoreArr = []; j < 18; j++) {
       scoreArr.push(0);
     }
 

@@ -9,24 +9,28 @@ angular.module('baseballScorekeeper')
   $scope.initializing = 5;
 
   $scope.updateBases = function(action, base) {
+    var a = $scope.activePlayer, atBat = $scope.gameState.bases.atBat;
+    var g = $scope.gameState;
+
     if ($scope.initializing) {
       // Evil floating droppable hacking.
       $scope.initializing--;
       return;
     }
-    if ($scope.gameState.bases.atBat === $scope.activePlayer) {
-      var runs = gameService.updateBases($scope.gameState, $scope.gameState.bases, action);
-      if (runs) {
-        $scope.gameState[$scope.battingTeam].runs += runs;
-        $scope.gameState.scoreArr[$scope.gameState.scoreIndex] += runs;
-      }
+
+    if (a === atBat) {
+    gameService.updateBases(g, action);
+
       $scope.batterActive = false;
-      $scope.showMessage($scope.gameState.play);
+      $scope.showMessage(g.play);
     }
+
     else if (action === 'run') {
-      gameService.updateBases($scope.gameState, $scope.gameState.bases, 'run');
+      var runs = gameService.updateBases(g, 'run');
+      $scope.gameState[$scope.battingTeam].runs += runs;
       $scope.showMessage($scope.gameState.play);
     }
+
     else if (base && ($scope.activePlayer !== $scope.gameState.bases[base])) {
       gameService.movePlayer($scope.activePlayer, base, $scope.gameState)
     }
@@ -45,10 +49,10 @@ angular.module('baseballScorekeeper')
   }
 
   $scope.pitch = function(args) {
-    var result = gameService.pitch(args, $scope.gameState.bases, $scope.gameState)
-    // $scope.gameState = result.state;
-    // $scope.gameState.bases = result.bases;
+    gameService.pitch(args, $scope.gameState.bases, $scope.gameState)
+
     $scope.menuActive = false;
+
     if ($scope.gameState.bases.atBat === null) {
       $scope.batterActive = false;
     }
