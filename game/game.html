@@ -108,11 +108,11 @@
       ng-show="showBoxes"
       data-drop="true"
       jqyoui-droppable="{onDrop: updateBases('triple', 'third')}"
-    ></div><div class="homerun-text tada animated" ng-show="showBoxes">Home Run!</div>
+    ></div><div class="homerun-text tada animated" ng-show="batterSelected">Home Run!</div>
 
     <div class="tada homerun animated"
     ng-model="homerunbase"
-    ng-show="showBoxes"
+    ng-show="batterSelected"
     data-drop="true"
     jqyoui-droppable="{onDrop: updateBases('homerun')}"
     ></div>

@@ -12,6 +12,7 @@ angular.module('baseballScorekeeper')
     if (action === 'run') {
       bases.third = null;
       runs++
+      state.play = 'Run scored!';
     }
 
     if (action === 'single') {
@@ -37,6 +38,7 @@ angular.module('baseballScorekeeper')
         bases.first = null;
       }
       bases.second = bases.atBat;
+      bases.atBat = null;
       state.play = 'Double!';
     } else if (action === 'triple') {
 
@@ -53,6 +55,7 @@ angular.module('baseballScorekeeper')
       bases.third = bases.atBat;
       bases.second = null;
       bases.first = null;
+      bases.atBat = null;
       state.play = 'Triple!';
     } else if (action === 'homerun') {
             runs++

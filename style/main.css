@@ -45,6 +45,7 @@ a {
   font-size: 8em;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   z-index: 10;
+  text-align: center;
 }
 
 
@@ -436,6 +437,7 @@ a {
   position: absolute;
   left: 25px;
   bottom: 50%;
+  z-index: 3;
 }
 
 .home-text {

@@ -6,8 +6,14 @@ angular.module('baseballScorekeeper')
   var teams = teams
   $scope.gameState = gameService.initializeGameState(teams);
   $scope.menuActive = false;
+  $scope.initializing = 5;
 
   $scope.updateBases = function(action, base) {
+    if ($scope.initializing) {
+      // Evil floating droppable hacking.
+      $scope.initializing--;
+      return;
+    }
     if ($scope.gameState.bases.atBat === $scope.activePlayer) {
       var runs = gameService.updateBases($scope.gameState, $scope.gameState.bases, action);
       if (runs) {
@@ -17,11 +23,12 @@ angular.module('baseballScorekeeper')
       $scope.batterActive = false;
       $scope.showMessage($scope.gameState.play);
     }
-    else if (base && ($scope.activePlayer !== $scope.gameState.bases[base])) {
-      gameService.movePlayer($scope.activePlayer, base, $scope.gameState)
-    }
     else if (action === 'run') {
       gameService.updateBases($scope.gameState, $scope.gameState.bases, 'run');
+      $scope.showMessage($scope.gameState.play);
+    }
+    else if (base && ($scope.activePlayer !== $scope.gameState.bases[base])) {
+      gameService.movePlayer($scope.activePlayer, base, $scope.gameState)
     }
   }
 
@@ -35,8 +42,6 @@ angular.module('baseballScorekeeper')
     }
     $scope.gameState.bases.atBat = b.players[b.battingIndex];
     $scope.batterActive = true;
-    // $scope.plays.push($scope.gameState);
-    // $scope.plays.push('test');
   }
 
   $scope.pitch = function(args) {
