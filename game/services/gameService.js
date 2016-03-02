@@ -103,7 +103,12 @@ angular.module('baseballScorekeeper')
             bases.third = null;
             bases.second = null;
             bases.first = null;
-            state.play = 'Home Run!';
+            var homeRuns = ["Dinger!", "Yahtzee!", "Booyah!","Big Salami!", "Jack!", "Big Fly!", "Adios, Pelota!", "Bomb!", "Blasted!", "Big Dog!", "Four-Bagger!","Round Tripper!", "Get Outta Here Ball!"];
+            var getHomeRun = function() {
+              var num = Math.floor(Math.random() * homeRuns.length);
+              return homeRuns[num];
+            }
+            state.play = getHomeRun();
     }
   }
 

@@ -13,6 +13,11 @@ a {
   right: 0;
 }
 
+.banner {
+  font-size: 8em;
+  color: white;
+}
+
 .jumbotron {
   background-image: url('../images/jumbotron.jpeg');
   background-size: cover;
