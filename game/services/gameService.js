@@ -103,6 +103,8 @@ angular.module('baseballScorekeeper')
     } else if (state.balls === 4) {
       bases.first = bases.atBat;
       bases.atBat = null;
+      state.strikes = 0;
+      state.balls = 0;
       state.play = 'Base on balls!'
     }
 

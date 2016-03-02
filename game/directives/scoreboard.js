@@ -10,11 +10,8 @@ angular.module('baseballScorekeeper')
       $scope.scoreArr = $scope.state.scoreArr;
       $scope.index = 0;
       $scope.scoreArr = $scope.state.scoreArr;
-      $scope.awayScore = $scope.state.away.runs;
-      $scope.homeScore = $scope.state.home.runs;
-      $scope.$watch('state', function() {
-        console.log($scope)
-      })
+      $scope.awayScore = $scope.state.away;
+      $scope.homeScore = $scope.state.home;
     }
   }
 })
